@@ -1,0 +1,8 @@
+# Executables
+*.exe
+
+#Inputs
+*.txt
+
+#core library
+core/*

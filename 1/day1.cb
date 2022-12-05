@@ -1,0 +1,33 @@
+import core.io
+import core.strings
+
+function main() {
+    FILE_NAME := "1/input.txt"
+
+    lines := read_file_lines(FILE_NAME)
+
+    mut elf := 0
+    mut elf_count := 0
+    mut highest_calories := 0
+    mut total_calories := 0
+
+    for (idx := 0; idx < lines.size; idx = idx + 1) {
+        line := lines[idx]
+        if (line == "") {
+            elf_count = elf_count + 1
+            if (highest_calories < total_calories) {
+                highest_calories = total_calories
+                elf = elf_count
+            }
+            total_calories = 0
+        } else {
+            total_calories = total_calories + parse_int(line)
+        }
+    }
+    //Once more at the end
+    if (highest_calories < total_calories) {
+        highest_calories = total_calories
+        elf = elf_count
+    }
+    println("Elf " + elf as string + " had the most calories, they had " + highest_calories as string + " calories")
+}
