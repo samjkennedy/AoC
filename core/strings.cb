@@ -1,1 +1,0 @@
-﻿function parse_int(s: string): int => foreign(ForeignFunction("System.Int32", "Parse", ["System.String"]), s, int)
