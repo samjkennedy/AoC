@@ -1,0 +1,110 @@
+import core.io
+
+function get_score(shape: char): int {
+    match shape {
+        'X' => return 1
+        'Y' => return 2
+        'Z' => return 3
+        else return 0
+    }
+}
+
+function calculate_score(opponent: char, player: char): int {
+    match opponent {
+        'A' => {
+            match player {
+                'X' => return 3
+                'Y' => return 6
+                'Z' => return 0
+                else return 0
+            }
+        }
+        'B' => {
+            match player {
+                'X' => return 0
+                'Y' => return 3
+                'Z' => return 6
+                else return 0
+            }
+        }
+        'C' => {
+            match player {
+                'X' => return 6
+                'Y' => return 0
+                'Z' => return 3
+                else return 0
+            }
+        }
+        else {
+            return 0
+        }
+    }
+}
+
+function calculate_move(opponent: char, result: char): char {
+    //X = lose, Y = draw, Z = win
+    // A for Rock, B for Paper, and C for Scissors
+    // X for Rock, Y for Paper, and Z for Scissors
+    partial match opponent {
+        'A' => {
+            partial match result {
+                'X' => return 'Z'
+                'Y' => return 'X'
+                'Z' => return 'Y'
+            }
+        }
+        'B' => {
+            partial match result {
+                'X' => return 'X'
+                'Y' => return 'Y'
+                'Z' => return 'Z'
+            }
+        }
+        'C' => {
+            partial match result {
+                'X' => return 'Y'
+                'Y' => return 'Z'
+                'Z' => return 'X'
+            }
+        }
+    }
+    return 'F'
+}
+
+function part_one() {
+    FILE_NAME := "2/input.txt"
+
+    lines := read_file_lines(FILE_NAME)
+
+    //Making the assumption that the line is always in the form "[A|B|C] [X|Y|Z]"
+    mut score := 0
+    for (line in lines) {
+
+        cs := line.chars()
+
+        score = score + calculate_score(cs[0], cs[2]) + get_score(cs[2])
+    }
+    println("Your final score was " + score as string)
+}
+
+function part_two() {
+FILE_NAME := "2/input.txt"
+
+    lines := read_file_lines(FILE_NAME)
+
+    mut score := 0
+    for (line in lines) {
+
+        cs := line.chars()
+
+        move := calculate_move(cs[0], cs[2])
+
+        score = score + calculate_score(cs[0], move) + get_score(move)
+    }
+    println("Your final score was " + score as string)
+}
+
+function main() {
+    part_one()
+    part_two()
+}
