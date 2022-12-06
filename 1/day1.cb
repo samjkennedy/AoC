@@ -1,7 +1,7 @@
 import core.io
 import core.strings
 
-function main() {
+function part_one() {
     FILE_NAME := "1/input.txt"
 
     lines := read_file_lines(FILE_NAME)
@@ -30,4 +30,60 @@ function main() {
         elf = elf_count
     }
     println("Elf " + elf as string + " had the most calories, they had " + highest_calories as string + " calories")
+}
+
+struct Elf {
+    index:          int
+    total_calories: int
+}
+
+function part_two() {
+    FILE_NAME := "1/input.txt"
+
+    lines := read_file_lines(FILE_NAME)
+
+    top_three_elves := [Elf(0, 0), Elf(0, 0), Elf(0, 0)]
+
+    mut elf_count := 0
+    mut total_calories := 0
+
+    for (idx := 0; idx < lines.size + 1; idx = idx + 1) {
+
+        //TODO: lazy evaluation of booleans would make this kind of OOB checking easier
+        mut new_elf := idx == lines.size
+        if (idx < lines.size) {
+            new_elf = lines[idx] == ""
+        }
+
+        if (new_elf) {
+            elf_count = elf_count + 1
+
+            mut elf_index_to_replace := 0 - 1 //Don't have negative numbers yet...
+            mut lowest_top_calories := top_three_elves[0].total_calories
+            for (e := 0; e < 3; e = e + 1) {
+                if (total_calories > top_three_elves[e].total_calories && lowest_top_calories >= top_three_elves[e].total_calories) {
+                    elf_index_to_replace = e
+                    lowest_top_calories = top_three_elves[e].total_calories
+                }
+            }
+            if (elf_index_to_replace >= 0) {
+                top_three_elves[elf_index_to_replace] = Elf(elf_count, total_calories)
+            }
+            total_calories = 0
+
+        } else {
+            total_calories = total_calories + parse_int(lines[idx])
+        }
+    }
+
+    total_calories = 0
+    for (elf in top_three_elves) {
+        total_calories = total_calories + elf.total_calories
+    }
+    println("The top three elves had " + total_calories as string + " calories in total")
+}
+
+function main() {
+    part_one()
+    part_two()
 }
