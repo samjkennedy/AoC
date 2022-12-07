@@ -88,7 +88,7 @@ part_one() {
 }
 
 part_two() {
-FILE_NAME := "2/input.txt"
+    FILE_NAME := "2/input.txt"
 
     lines := read_file_lines(FILE_NAME)
 
