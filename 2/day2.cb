@@ -1,6 +1,6 @@
 import core.io
 
-function get_score(shape: char): int {
+get_score(shape: char): int {
     match shape {
         'X' => return 1
         'Y' => return 2
@@ -9,7 +9,7 @@ function get_score(shape: char): int {
     }
 }
 
-function calculate_score(opponent: char, player: char): int {
+calculate_score(opponent: char, player: char): int {
     match opponent {
         'A' => {
             match player {
@@ -41,7 +41,7 @@ function calculate_score(opponent: char, player: char): int {
     }
 }
 
-function calculate_move(opponent: char, result: char): char {
+calculate_move(opponent: char, result: char): char {
     //X = lose, Y = draw, Z = win
     // A for Rock, B for Paper, and C for Scissors
     // X for Rock, Y for Paper, and Z for Scissors
@@ -71,7 +71,7 @@ function calculate_move(opponent: char, result: char): char {
     return 'F'
 }
 
-function part_one() {
+part_one() {
     FILE_NAME := "2/input.txt"
 
     lines := read_file_lines(FILE_NAME)
@@ -87,7 +87,7 @@ function part_one() {
     println("Your final score was " + score as string)
 }
 
-function part_two() {
+part_two() {
 FILE_NAME := "2/input.txt"
 
     lines := read_file_lines(FILE_NAME)
@@ -104,7 +104,7 @@ FILE_NAME := "2/input.txt"
     println("Your final score was " + score as string)
 }
 
-function main() {
+main() {
     part_one()
     part_two()
 }

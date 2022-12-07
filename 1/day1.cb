@@ -1,7 +1,7 @@
 import core.io
 import core.strings
 
-function part_one() {
+part_one() {
     FILE_NAME := "1/input.txt"
 
     lines := read_file_lines(FILE_NAME)
@@ -37,7 +37,7 @@ struct Elf {
     total_calories: int
 }
 
-function part_two() {
+part_two() {
     FILE_NAME := "1/input.txt"
 
     lines := read_file_lines(FILE_NAME)
@@ -83,7 +83,7 @@ function part_two() {
     println("The top three elves had " + total_calories as string + " calories in total")
 }
 
-function main() {
+main() {
     part_one()
     part_two()
 }
